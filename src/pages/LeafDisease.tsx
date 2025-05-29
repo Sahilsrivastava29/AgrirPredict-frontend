@@ -21,8 +21,12 @@ import {
 } from 'lucide-react';
 import axios from 'axios';
 
+const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:8000";
+
 const diseaseInfo: Record<string, { description: string; treatment: string }> = {
   
+
+
   "Apple___Apple_scab": {
   "description": "A fungal disease causing olive-green to black velvety spots on leaves and fruit, leading to premature leaf drop and fruit deformities.",
   "treatment": "Apply fungicides such as captan or mancozeb from bud break until wet weather subsides. Practice good sanitation by removing fallen leaves and pruning infected branches. Rotate fungicides to prevent resistance."
@@ -209,7 +213,7 @@ const LeafDisease = () => {
     formData.append("file", selectedFile);
 
     try {
-      const response = await axios.post("http://localhost:8000/leaf-disease", formData, {
+      const response = await axios.post(`${apiUrl}/leaf-disease`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import Layout from '@/components/layout/Layout';
 import { motion } from 'framer-motion';
@@ -50,6 +49,8 @@ const CropPrediction = () => {
   const [isPredicting, setIsPredicting] = useState(false);
   const { toast } = useToast();
 
+  const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:8000";
+
   const handleInputChange = (field: keyof CropPredictionFormData, value: number) => {
     setFormData(prev => ({
       ...prev,
@@ -62,7 +63,7 @@ const CropPrediction = () => {
     setIsPredicting(true);
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/crop-prediction", {
+      const response = await fetch(`${apiUrl}/crop-prediction`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
